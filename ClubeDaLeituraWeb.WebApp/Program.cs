@@ -1,25 +1,33 @@
-var builder = WebApplication.CreateBuilder(args);
+namespace ClubeDaLeituraWeb.WebApp;
 
-// Configuração de Serviços
-builder.Services.AddControllersWithViews().AddRazorOptions(options =>
+public class Program
 {
-    // Resetar a configuração padrão do MVC
-    options.ViewLocationFormats.Clear();
+    private static void Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
 
-    // Views dos módulos: /ModuloCaixa/Apresentacao/Views/Listar.cshtml
-    options.ViewLocationFormats.Add("/Modulo{1}/Apresentacao/Views/{0}.cshtml");
+        // Configuração de Serviços
+        builder.Services.AddControllersWithViews().AddRazorOptions(options =>
+        {
+            // Resetar a configuração padrão do MVC
+            options.ViewLocationFormats.Clear();
 
-    // Views compartilhadas: /Compartilhado/Apresentacao/Views/_Layout.cshtml
-    options.ViewLocationFormats.Add("/Compartilhado/Apresentacao/Views/{0}.cshtml");
-});
+            // Views dos módulos: /ModuloCaixa/Apresentacao/Views/Listar.cshtml
+            options.ViewLocationFormats.Add("/Modulo{1}/Apresentacao/Views/{0}.cshtml");
 
-var app = builder.Build();
+            // Views compartilhadas: /Compartilhado/Apresentacao/Views/_Layout.cshtml
+            options.ViewLocationFormats.Add("/Compartilhado/Apresentacao/Views/{0}.cshtml");
+        });
 
-// Configuração de Middlewares
-app.UseStaticFiles();
+        var app = builder.Build();
 
-app.UseRouting();
-app.MapDefaultControllerRoute();
+        // Configuração de Middlewares
+        app.UseStaticFiles();
 
-// Execução do App
-app.Run();
+        app.UseRouting();
+        app.MapDefaultControllerRoute();
+
+        // Execução do App
+        app.Run();
+    }
+}
