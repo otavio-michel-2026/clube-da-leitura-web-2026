@@ -1,11 +1,14 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using ClubeDaLeituraWeb.WebApp.ModuloAmigo.Dominio;
 
 namespace ClubeDaLeituraWeb.WebApp.Compartilhado.Infra.Arquivos;
 
 public sealed class ContextoJson
 {
     private readonly string caminhoArquivo;
+
+    public List<Amigo> Amigos { get; set; } = [];
 
     public ContextoJson()
     {
@@ -47,5 +50,7 @@ public sealed class ContextoJson
 
         if (contextoSalvo == null)
             return;
+
+        Amigos = contextoSalvo.Amigos;
     }
 }

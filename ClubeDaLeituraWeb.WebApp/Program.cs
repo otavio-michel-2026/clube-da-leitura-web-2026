@@ -1,3 +1,7 @@
+using ClubeDaLeituraWeb.WebApp.Compartilhado.Infra.Arquivos;
+using ClubeDaLeituraWeb.WebApp.ModuloAmigo.Dominio;
+using ClubeDaLeituraWeb.WebApp.ModuloAmigo.Infra;
+
 namespace ClubeDaLeituraWeb.WebApp;
 
 public class Program
@@ -5,6 +9,17 @@ public class Program
     private static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+
+        builder.Services.AddScoped(provider =>
+        {
+            ContextoJson contextoJson = new ContextoJson();
+        
+            contextoJson.Carregar();
+        
+            return contextoJson;
+        });
+
+        builder.Services.AddScoped<IRepositorioAmigo, RepositorioAmigo>();
 
         // Configuração de Serviços
         builder.Services.AddControllersWithViews().AddRazorOptions(options =>
