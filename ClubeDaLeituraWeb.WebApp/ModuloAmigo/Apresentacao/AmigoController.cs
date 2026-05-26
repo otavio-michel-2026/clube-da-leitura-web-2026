@@ -67,6 +67,9 @@ namespace ClubeDaLeituraWeb.WebApp.ModuloAmigo.Apresentacao
         [HttpPost]
         public ActionResult Editar(AmigoViewModel vm)
         {
+            if (!ModelState.IsValid)
+                return View(vm);
+                
             Amigo amigoEditado = new(
                 vm.Nome,
                 vm.NomeResponsavel,
