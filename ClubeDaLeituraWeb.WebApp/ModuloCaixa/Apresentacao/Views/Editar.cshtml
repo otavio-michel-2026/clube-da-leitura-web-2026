@@ -9,22 +9,21 @@
     <input asp-for="Id" type="hidden">
 
     <div class="mb-3">
-        <label asp-for="Etiqueta" class="form-label fw-semibold text-primary text-uppercase small">Nome</label>
+        <label asp-for="Etiqueta" class="form-label fw-semibold text-primary text-uppercase small">Etiqueta</label>
         <input asp-for="Etiqueta" type="text" class="form-control">
         <span asp-validation-for="Etiqueta" class="text-danger small fw-semibold"></span>
     </div>
 
     <div class="mb-3">
-        <label asp-for="Cor" class="form-label fw-semibold text-primary text-uppercase small">Nome do
-            Responsável</label>
-            <input asp-for="Cor" type="text" class="form-control">
-            <span asp-validation-for="Cor" class="text-danger small fw-semibold"></span>
-        </div>
+        <label asp-for="Cor" class="form-label fw-semibold text-primary text-uppercase small">Cor</label>
+        <input asp-for="Cor" type="text" class="form-control">
+        <span asp-validation-for="Cor" class="text-danger small fw-semibold"></span>
+    </div>
 
-        <div class="mb-3">
-            <label asp-for="DiasDeEmprestimo"
-                   class="form-label fw-semibold text-primary text-uppercase small">DiasDeEmprestimo</label>
-            <input asp-for="DiasDeEmprestimo" type="text" class="form-control">
+    <div class="mb-3">
+        <label asp-for="DiasDeEmprestimo" class="form-label fw-semibold text-primary text-uppercase small">Dias de
+            Emprestimo</label>
+            <input asp-for="DiasDeEmprestimo" type="number" class="form-control">
             <span asp-validation-for="DiasDeEmprestimo" class="text-danger small fw-semibold"></span>
         </div>
 

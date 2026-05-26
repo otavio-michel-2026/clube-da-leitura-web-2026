@@ -1,5 +1,4 @@
 @{
-    Layout = "_Layout";
     ViewBag.Titulo = "Cadastro de Caixa";
 }
 
@@ -23,7 +22,7 @@
     <div class="mb-3">
         <label asp-for="DiasDeEmprestimo" class="form-label fw-semibold text-primary text-uppercase small">Dias de
             Empréstimo</label>
-            <input asp-for="DiasDeEmprestimo" type="number" min="1" class="form-control">
+            <input asp-for="DiasDeEmprestimo" type="number" class="form-control">
             <span asp-validation-for="DiasDeEmprestimo" class="text-danger small fw-semibold"></span>
         </div>
 
