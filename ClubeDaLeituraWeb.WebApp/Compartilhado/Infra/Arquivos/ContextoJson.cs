@@ -6,6 +6,7 @@ namespace ClubeDaLeituraWeb.WebApp.Compartilhado.Infra.Arquivos;
 
 public sealed class ContextoJson
 {
+    public List<Caixa> Caixas = new List<Caixa>();
     private readonly string caminhoArquivo;
 
     public ContextoJson()
@@ -48,5 +49,7 @@ public sealed class ContextoJson
 
         if (contextoSalvo == null)
             return;
+
+        Caixas = contextoSalvo.Caixas;
     }
 }

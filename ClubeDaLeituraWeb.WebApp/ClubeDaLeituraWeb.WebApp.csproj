@@ -10,7 +10,7 @@
     <Folder Include="ModuloCaixa\" />
     <Folder Include="ModuloCaixa\Apresentacao\" />
     <Folder Include="ModuloCaixa\Dominio\" />
-    <Folder Include="ModuloCaixa\Inrfra\" />
+    <Folder Include="ModuloCaixa\Infra\" />
   </ItemGroup>
 
 </Project>
