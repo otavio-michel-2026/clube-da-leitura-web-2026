@@ -15,14 +15,14 @@ public abstract class RepositorioBaseEmArquivo<T> where T : EntidadeBase<T>
 
     protected abstract List<T> CarregarRegistros();
 
-    public void Cadastrar(T entidade)
+    public virtual void Cadastrar(T entidade)
     {
         registros.Add(entidade);
 
         contexto.Salvar();
     }
 
-    public bool Editar(string idSelecionado, T entidadeAtualizada)
+    public virtual bool Editar(string idSelecionado, T entidadeAtualizada)
     {
         T? registroSelecionado = SelecionarPorId(idSelecionado);
 
@@ -36,7 +36,7 @@ public abstract class RepositorioBaseEmArquivo<T> where T : EntidadeBase<T>
         return true;
     }
 
-    public bool Excluir(T registro)
+    public virtual bool Excluir(T registro)
     {
         bool conseguiuExcluir = registros.Remove(registro);
 
@@ -46,7 +46,7 @@ public abstract class RepositorioBaseEmArquivo<T> where T : EntidadeBase<T>
         return conseguiuExcluir;
     }
 
-    public bool Excluir(string idSelecionado)
+    public virtual bool Excluir(string idSelecionado)
     {
         T? registroSelecionado = SelecionarPorId(idSelecionado);
 
@@ -56,7 +56,7 @@ public abstract class RepositorioBaseEmArquivo<T> where T : EntidadeBase<T>
         return Excluir(registroSelecionado);
     }
 
-    public T? SelecionarPorId(string idSelecionado)
+    public virtual T? SelecionarPorId(string idSelecionado)
     {
         foreach (T registro in registros)
         {
@@ -67,12 +67,12 @@ public abstract class RepositorioBaseEmArquivo<T> where T : EntidadeBase<T>
         return null;
     }
 
-    public List<T> SelecionarTodos()
+    public virtual List<T> SelecionarTodos()
     {
         return registros;
     }
 
-    public List<T> Filtrar(Predicate<T> filtro)
+    public virtual List<T> Filtrar(Predicate<T> filtro)
     {
         List<T> registrosFiltrados = new List<T>();
 
