@@ -1,0 +1,30 @@
+﻿@{
+    List<SelectListItem> selecionarAmigos = ViewBag.Amigos;
+    List<SelectListItem> selecionarRevistas = ViewBag.Revistas;
+    ViewBag.Titulo = "Cadastro de empréstimo";
+}
+
+@model EmprestimoViewModel;
+
+<form class="card border-primary-subtle shadow-sm mx-auto p-4" style="max-width: 620px;" asp-action="Cadastrar" method="post">
+    <div class="mb-3">
+        <label asp-for="AmigoId" class="form-label fw-semibold text-primary text-uppercase small">Amigo</label>
+        <select asp-for="AmigoId" asp-items="selecionarAmigos" type="text" class="form-control">
+            <option value="">Selecione um amigo</option>
+        </select>
+        <span asp-validation-for="AmigoId" class="text-danger small fw-semibold"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="RevistaId" class="form-label fw-semibold text-primary text-uppercase small">Revista</label>
+        <select asp-for="RevistaId" asp-items="selecionarRevistas" type="text" class="form-control">
+            <option value="">Selecione uma revista</option>
+        </select>
+        <span asp-validation-for="RevistaId" class="text-danger small fw-semibold"></span>
+    </div>
+
+    <div class="d-flex justify-content-end gap-2 mt-4">
+        <a class="btn btn-outline-primary rounded-pill px-4" asp-action="Listar">Voltar</a>
+        <button class="btn btn-primary rounded-pill px-4" type="submit">Confirmar</button>
+    </div>
+</form>
