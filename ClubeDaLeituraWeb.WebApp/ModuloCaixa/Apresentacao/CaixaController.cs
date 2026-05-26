@@ -17,7 +17,7 @@ public class CaixaController : Controller
     public ActionResult Listar()
     {
         var vms = repositorioCaixa.SelecionarTodos()
-            .Select(c => new CaixaViewModel(c.Etiqueta, c.Cor, c.DiasDeEmprestimo, c.QtdRevistas, c.Id)).ToList();
+            .Select(c => new CaixaViewModel(c.Etiqueta, c.Cor, c.DiasDeEmprestimo, c.Revistas.Count, c.Id)).ToList();
 
         return View(vms);
     }
@@ -36,15 +36,18 @@ public class CaixaController : Controller
     }
 
     [HttpPost]
-    public ActionResult Cadastrar(CaixaViewModel caixa)
+    public ActionResult Cadastrar(CaixaViewModel vm)
     {
+        if (repositorioCaixa.SelecionarTodos().Any(c => c.Etiqueta == vm.Etiqueta))
+            ModelState.AddModelError(nameof(vm.Etiqueta), "Ja existe uma Caixa com essa Etiqueta");
+
         if (!ModelState.IsValid)
-            return View(caixa);
+            return View(vm);
 
         Caixa novaCaixa = new(
-            caixa.Etiqueta,
-            caixa.Cor,
-            caixa.DiasDeEmprestimo
+            vm.Etiqueta,
+            vm.Cor,
+            vm.DiasDeEmprestimo
         );
 
         repositorioCaixa.Cadastrar(novaCaixa);
@@ -64,7 +67,7 @@ public class CaixaController : Controller
             caixa.Etiqueta,
             caixa.Cor,
             caixa.DiasDeEmprestimo,
-            caixa.QtdRevistas,
+            caixa.Revistas.Count,
             id
         );
 
@@ -72,18 +75,21 @@ public class CaixaController : Controller
     }
 
     [HttpPost]
-    public ActionResult Editar(CaixaViewModel caixa)
+    public ActionResult Editar(CaixaViewModel vm)
     {
+        if (repositorioCaixa.SelecionarTodos().Any(c => c.Etiqueta == vm.Etiqueta))
+            ModelState.AddModelError(nameof(vm.Etiqueta), "Ja existe uma Caixa com essa Etiqueta");
+
         if (!ModelState.IsValid)
-            return View(caixa);
+            return View(vm);
 
         Caixa novaCaixa = new Caixa(
-            caixa.Etiqueta,
-            caixa.Cor,
-            caixa.DiasDeEmprestimo
+            vm.Etiqueta,
+            vm.Cor,
+            vm.DiasDeEmprestimo
         );
 
-        repositorioCaixa.Editar(caixa.Id, novaCaixa);
+        repositorioCaixa.Editar(vm.Id, novaCaixa);
 
         return RedirectToAction(nameof(Listar));
     }
@@ -100,7 +106,7 @@ public class CaixaController : Controller
         caixa.Etiqueta,
         caixa.Cor,
         caixa.DiasDeEmprestimo,
-        caixa.QtdRevistas,
+        caixa.Revistas.Count,
         id
     );
 
@@ -112,8 +118,16 @@ public class CaixaController : Controller
     {
         Caixa? caixa = repositorioCaixa.SelecionarPorId(excluirVm.Id);
 
-        if (caixa != null && caixa!.QtdRevistas == 0)
-            repositorioCaixa.Excluir(caixa);
+        if (caixa == null)
+            return RedirectToAction(nameof(Listar));
+
+        if (caixa.Revistas.Count != 0)
+            ModelState.AddModelError(nameof(excluirVm.Id), "Essa Caixa contem revistas");
+
+        if (!ModelState.IsValid)
+            return View(excluirVm);
+
+        repositorioCaixa.Excluir(caixa);
 
         return RedirectToAction(nameof(Listar));
     }

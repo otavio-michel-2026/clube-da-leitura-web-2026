@@ -8,7 +8,7 @@ public class Caixa : EntidadeBase<Caixa>
     public string Etiqueta { get; set; } = string.Empty;
     public string Cor { get; set; } = string.Empty;
     public int DiasDeEmprestimo { get; set; } = 7;
-    public int QtdRevistas { get; set; } = 0;
+    public List<Revista> Revistas { get; set; } = [];
 
     public Caixa() { }
     public Caixa(string etiqueta, string cor, int diasDeEmprestimo)
@@ -24,13 +24,13 @@ public class Caixa : EntidadeBase<Caixa>
         DiasDeEmprestimo = entidadeAtualizada.DiasDeEmprestimo;
     }
 
-    public void AddRevistaHaCaixa()
+    public void AddRevistaHaCaixa(Revista revista)
     {
-        QtdRevistas += 1;
+        Revistas.Add(revista);
     }
 
-    public void RetirarRevistaDaCaixa()
+    public void RetirarRevistaDaCaixa(Revista revista)
     {
-        QtdRevistas -= 1;
+        Revistas.Remove(revista);
     }
 }

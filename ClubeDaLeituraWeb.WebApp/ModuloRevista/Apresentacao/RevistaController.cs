@@ -54,13 +54,12 @@ public class RevistaController : Controller
             return View(vm);
         }
 
-        caixa!.AddRevistaHaCaixa();
         Revista novarevista = new(
         vm.Titulo,
         vm.NumeroDeEdicao,
         vm.AnoDePublicacao,
         caixa!
-    );
+        );
 
         repositorioRevista.Cadastrar(novarevista);
 
@@ -140,7 +139,7 @@ public class RevistaController : Controller
 
         if (revista != null)
         {
-            revista.Caixa.RetirarRevistaDaCaixa();
+            revista.Caixa.RetirarRevistaDaCaixa(revista);
             repositorioRevista.Excluir(revista);
         }
         return RedirectToAction(nameof(Listar));

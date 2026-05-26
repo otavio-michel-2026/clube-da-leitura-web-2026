@@ -24,6 +24,7 @@ public class Revista : EntidadeBase<Revista>
         NumeroDeEdicao = numeroDeEdicao;
         AnoDePublicacao = anoDePublicacao;
         Caixa = caixa;
+        Caixa.AddRevistaHaCaixa(this);
     }
 
     public override void AtualizarDados(Revista entidadeAtualizada)
