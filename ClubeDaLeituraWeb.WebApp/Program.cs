@@ -1,6 +1,8 @@
 using ClubeDaLeituraWeb.WebApp.Compartilhado.Infra.Arquivos;
 using ClubeDaLeituraWeb.WebApp.ModuloCaixa.Dominio;
 using ClubeDaLeituraWeb.WebApp.ModuloCaixa.Infra;
+using ClubeDaLeituraWeb.WebApp.ModuloRevista.Dominio;
+using ClubeDaLeituraWeb.WebApp.ModuloRevista.Infra;
 
 namespace ClubeDaLeituraWeb.WebApp;
 
@@ -19,8 +21,8 @@ public class Program
             return contextoJson;
         });
 
-        builder.Services.AddScoped<IRepositorioCaixa, RepositorioCaixaEmArquivo>();
-
+        builder.Services.AddScoped<IRepositorioCaixa, RepositorioCaixa>();
+        builder.Services.AddScoped<IRepositorioRevista, RepositorioRevista>();
         // Configuração de Serviços
         builder.Services.AddControllersWithViews().AddRazorOptions(options =>
         {
