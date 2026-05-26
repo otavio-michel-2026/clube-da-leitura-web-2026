@@ -6,4 +6,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="ModuloCaixa\" />
+    <Folder Include="ModuloCaixa\Apresentacao\" />
+    <Folder Include="ModuloCaixa\Dominio\" />
+    <Folder Include="ModuloCaixa\Inrfra\" />
+  </ItemGroup>
+
 </Project>

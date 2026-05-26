@@ -1,3 +1,5 @@
+using ClubeDaLeituraWeb.WebApp.Compartilhado.Infra.Arquivos;
+
 namespace ClubeDaLeituraWeb.WebApp;
 
 public class Program
