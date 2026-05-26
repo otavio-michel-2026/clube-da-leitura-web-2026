@@ -3,9 +3,9 @@ using ClubeDaLeituraWeb.WebApp.ModuloRevista.Dominio;
 
 namespace ClubeDaLeituraWeb.WebApp.ModuloRevista.Infra;
 
-public class repositorioRevista : RepositorioBaseEmArquivo<Revista>, IRepositorioRevista
+public class RepositorioRevista : RepositorioBaseEmArquivo<Revista>, IRepositorioRevista
 {
-    public repositorioRevista(ContextoJson contexto) : base(contexto) { }
+    public RepositorioRevista(ContextoJson contexto) : base(contexto) { }
     protected override List<Revista> CarregarRegistros()
     {
         return contexto.Revistas;

@@ -3,9 +3,9 @@ using ClubeDaLeituraWeb.WebApp.ModuloCaixa.Dominio;
 
 namespace ClubeDaLeituraWeb.WebApp.ModuloCaixa.Infra
 {
-    public class RepositorioCaixaEmArquivo : RepositorioBaseEmArquivo<Caixa>, IRepositorioCaixa
+    public class RepositorioCaixa : RepositorioBaseEmArquivo<Caixa>, IRepositorioCaixa
     {
-        public RepositorioCaixaEmArquivo(ContextoJson contexto) : base(contexto) { }
+        public RepositorioCaixa(ContextoJson contexto) : base(contexto) { }
         protected override List<Caixa> CarregarRegistros()
         {
             return contexto.Caixas;
