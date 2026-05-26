@@ -43,6 +43,11 @@ public class RevistaController : Controller
     [HttpPost]
     public ActionResult Cadastrar(RevistaViewModel vm)
     {
+        if (repositorioRevista.SelecionarTodos().Any(r => r.Titulo == vm.Titulo && r.NumeroDeEdicao == vm.NumeroDeEdicao))
+        {
+            ModelState.AddModelError(nameof(vm.Titulo), "Ja existe uma Revista com esse titulo e n° edicao");
+            ModelState.AddModelError(nameof(vm.NumeroDeEdicao), "Ja existe uma Revista com esse titulo e n° edicao");
+        }
         Caixa? caixa = repositorioCaixa.SelecionarPorId(vm.CaixaId);
 
         if (caixa is null || vm.CaixaId == string.Empty)
@@ -90,6 +95,11 @@ public class RevistaController : Controller
     [HttpPost]
     public ActionResult Editar(RevistaViewModel vm)
     {
+        if (repositorioRevista.SelecionarTodos().Any(r => r.Titulo == vm.Titulo && r.NumeroDeEdicao == vm.NumeroDeEdicao))
+        {
+            ModelState.AddModelError(nameof(vm.Titulo), "Ja existe uma Revista com esse titulo e n° edicao");
+            ModelState.AddModelError(nameof(vm.NumeroDeEdicao), "Ja existe uma Revista com esse titulo e n° edicao");
+        }
         Caixa? caixa = repositorioCaixa.SelecionarPorId(vm.CaixaId);
 
         if (caixa is null || vm.CaixaId == string.Empty)
