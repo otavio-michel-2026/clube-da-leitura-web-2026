@@ -122,10 +122,10 @@ public class CaixaController : Controller
             return RedirectToAction(nameof(Listar));
 
         if (caixa.Revistas.Count != 0)
+        {
             ViewBag.Erro = "Esssa caixa contem revistas";
-
-        if (!ModelState.IsValid)
             return View(excluirVm);
+        }
 
         repositorioCaixa.Excluir(caixa);
 
