@@ -7,6 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="ModuloCaixa\Apresentacao\Views\" />
+    <Folder Include="ModuloCaixa\Dominio\" />
+    <Folder Include="ModuloCaixa\Infra\" />
     <Folder Include="ModuloAmigo\Apresentacao\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>

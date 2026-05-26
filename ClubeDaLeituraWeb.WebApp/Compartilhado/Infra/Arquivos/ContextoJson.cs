@@ -1,11 +1,15 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using ClubeDaLeituraWeb.WebApp.ModuloCaixa.Dominio;
+using ClubeDaLeituraWeb.WebApp.ModuloRevista.Dominio;
 using ClubeDaLeituraWeb.WebApp.ModuloAmigo.Dominio;
 
 namespace ClubeDaLeituraWeb.WebApp.Compartilhado.Infra.Arquivos;
 
 public sealed class ContextoJson
 {
+    public List<Caixa> Caixas { get; set; } = [];
+    public List<Revista> Revistas { get; set; } = [];
     private readonly string caminhoArquivo;
 
     public List<Amigo> Amigos { get; set; } = [];
@@ -51,6 +55,8 @@ public sealed class ContextoJson
         if (contextoSalvo == null)
             return;
 
+        Caixas = contextoSalvo.Caixas;
+        Revistas = contextoSalvo.Revistas;
         Amigos = contextoSalvo.Amigos;
     }
 }

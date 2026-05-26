@@ -1,0 +1,45 @@
+@{
+    ViewBag.Titulo = "Exclusao de Revista";
+}
+
+@model RevistaMostrarViewModel;
+
+<div class="alert alert-primary border-start border-primary border-2 rounded-3" role="alert">
+    Deseja realmente excluir essa revista?
+</div>
+
+<form class="card border-primary-subtle shadow-sm mx-auto p-4" style="max-width: 620px;" asp-action="Excluir"
+      asp-route-id="@Model.Id" method="post">
+
+    <div class="mb-3">
+        <label asp-for="Id" class="form-label fw-semibold text-primary text-uppercase small">Id</label>
+        <input asp-for="Id" type="text" disabled class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Titulo" class="form-label fw-semibold text-primary text-uppercase small">Titulo</label>
+        <input asp-for="Titulo" type="text" disabled class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="NumeroDeEdicao" class="form-label fw-semibold text-primary text-uppercase small">Numero da
+            Edicao</label>
+            <input asp-for="NumeroDeEdicao" type="number" disabled class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="AnoDePublicacao" class="form-label fw-semibold text-primary text-uppercase small">Ano de
+                Publicacao</label>
+                <input asp-for="AnoDePublicacao" type="number" disabled class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Caixa" class="form-label fw-semibold text-primary text-uppercase small">Caixa</label>
+                <input asp-for="Caixa" type="text" disabled class="form-control">
+            </div>
+
+            <div class="d-flex justify-content-end gap-2 mt-4">
+                <a class="btn btn-outline-primary rounded-pill px-4" asp-action="Listar">Voltar</a>
+                <button class="btn btn-primary rounded-pill px-4" type="submit">Confirmar</button>
+            </div>
+        </form>

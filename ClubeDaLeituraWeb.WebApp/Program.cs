@@ -1,4 +1,8 @@
 using ClubeDaLeituraWeb.WebApp.Compartilhado.Infra.Arquivos;
+using ClubeDaLeituraWeb.WebApp.ModuloCaixa.Dominio;
+using ClubeDaLeituraWeb.WebApp.ModuloCaixa.Infra;
+using ClubeDaLeituraWeb.WebApp.ModuloRevista.Dominio;
+using ClubeDaLeituraWeb.WebApp.ModuloRevista.Infra;
 using ClubeDaLeituraWeb.WebApp.ModuloAmigo.Dominio;
 using ClubeDaLeituraWeb.WebApp.ModuloAmigo.Infra;
 
@@ -21,6 +25,18 @@ public class Program
 
         builder.Services.AddScoped<IRepositorioAmigo, RepositorioAmigo>();
 
+        builder.Services.AddScoped(provider =>
+        {
+            ContextoJson contextoJson = new ContextoJson();
+        
+            contextoJson.Carregar();
+        
+            return contextoJson;
+        });
+        builder.Services.AddScoped<IRepositorioCaixa, RepositorioCaixa>();
+        builder.Services.AddScoped<IRepositorioRevista, RepositorioRevista>();
+        builder.Services.AddScoped<IRepositorioAmigo, RepositorioAmigo>();
+        
         // Configuração de Serviços
         builder.Services.AddControllersWithViews().AddRazorOptions(options =>
         {

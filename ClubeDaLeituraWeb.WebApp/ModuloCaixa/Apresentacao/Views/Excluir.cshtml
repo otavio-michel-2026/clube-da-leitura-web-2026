@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Titulo = "Exclusão de Caixa";
+}
+
+@model CaixaViewModel;
+
+<div class="alert alert-primary border-start border-primary border-2 rounded-3" role="alert">
+    Deseja realmente excluir essa caixa?
+</div>
+
+<form class="card border-primary-subtle shadow-sm mx-auto p-4" style="max-width: 620px;" asp-action="Excluir"
+      asp-route-id="@Model.Id" method="post">
+
+    <div class="mb-3">
+        <label asp-for="Id" class="form-label fw-semibold text-primary text-uppercase small">Id</label>
+        <input asp-for="Id" type="text" disabled class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Etiqueta" class="form-label fw-semibold text-primary text-uppercase small">Nome</label>
+        <input asp-for="Etiqueta" type="text" disabled class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Cor" class="form-label fw-semibold text-primary text-uppercase small">Nome do
+            Responsável</label>
+            <input asp-for="Cor" type="text" disabled class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="DiasDeEmprestimo"
+                   class="form-label fw-semibold text-primary text-uppercase small">Telefone</label>
+            <input asp-for="DiasDeEmprestimo" type="text" disabled class="form-control">
+        </div>
+
+        <div class="d-flex justify-content-end gap-2 mt-4">
+            <a class="btn btn-outline-primary rounded-pill px-4" asp-action="Listar">Voltar</a>
+            <button class="btn btn-primary rounded-pill px-4" type="submit">Confirmar</button>
+        </div>
+    </form>
