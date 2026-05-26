@@ -9,6 +9,7 @@ public class Revista : EntidadeBase<Revista>
     public uint NumeroDeEdicao { get; set; }
     public int AnoDePublicacao { get; set; }
     public Caixa Caixa { get; set; } = null!;
+    public StatusRevista StatusRevista { get; set; } = StatusRevista.Disponível;
 
     public Revista() { }
 
@@ -24,6 +25,15 @@ public class Revista : EntidadeBase<Revista>
         NumeroDeEdicao = numeroDeEdicao;
         AnoDePublicacao = anoDePublicacao;
         Caixa = caixa;
+    }
+
+    public void EmprestarRevista()
+    {
+        StatusRevista = StatusRevista.Emprestada;
+    }
+    public void DevolverRevista()
+    {
+        StatusRevista = StatusRevista.Disponível;
     }
 
     public override void AtualizarDados(Revista entidadeAtualizada)

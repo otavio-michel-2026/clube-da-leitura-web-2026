@@ -11,6 +11,8 @@
     <Folder Include="ModuloCaixa\Dominio\" />
     <Folder Include="ModuloCaixa\Infra\" />
     <Folder Include="ModuloAmigo\Apresentacao\" />
+    <Folder Include="ModuloEmprestimo\Dominio\" />
+    <Folder Include="ModuloEmprestimo\Infra\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

@@ -5,6 +5,8 @@ using ClubeDaLeituraWeb.WebApp.ModuloRevista.Dominio;
 using ClubeDaLeituraWeb.WebApp.ModuloRevista.Infra;
 using ClubeDaLeituraWeb.WebApp.ModuloAmigo.Dominio;
 using ClubeDaLeituraWeb.WebApp.ModuloAmigo.Infra;
+using ClubeDaLeituraWeb.WebApp.ModuloEmprestimo.Dominio;
+using ClubeDaLeituraWeb.WebApp.ModuloEmprestimo.Infra;
 
 namespace ClubeDaLeituraWeb.WebApp;
 
@@ -16,18 +18,7 @@ public class Program
 
         builder.Services.AddScoped(provider =>
         {
-            ContextoJson contextoJson = new ContextoJson();
-        
-            contextoJson.Carregar();
-        
-            return contextoJson;
-        });
-
-        builder.Services.AddScoped<IRepositorioAmigo, RepositorioAmigo>();
-
-        builder.Services.AddScoped(provider =>
-        {
-            ContextoJson contextoJson = new ContextoJson();
+            ContextoJson contextoJson = new();
         
             contextoJson.Carregar();
         
@@ -36,6 +27,7 @@ public class Program
         builder.Services.AddScoped<IRepositorioCaixa, RepositorioCaixa>();
         builder.Services.AddScoped<IRepositorioRevista, RepositorioRevista>();
         builder.Services.AddScoped<IRepositorioAmigo, RepositorioAmigo>();
+        builder.Services.AddScoped<IRepositorioEmprestimo, RepositorioEmprestimo>();
         
         // Configuração de Serviços
         builder.Services.AddControllersWithViews().AddRazorOptions(options =>
