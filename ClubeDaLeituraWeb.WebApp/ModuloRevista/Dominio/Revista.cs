@@ -9,6 +9,19 @@ public class Revista : EntidadeBase<Revista>
     public uint NumeroDeEdicao { get; set; } = 0;
     public int AnoDePublicacao { get; set; } = 0;
     public Caixa? Caixa { get; set; } = null;
+
+    public Revista
+    (
+        string titulo,
+        uint numeroDeEdicao,
+        int anoDePublicacao,
+        Caixa? caixa = null
+    )
+    {
+        Titulo = titulo;
+        NumeroDeEdicao = numeroDeEdicao;
+        AnoDePublicacao = anoDePublicacao;
+    }
     public override void AtualizarDados(Revista entidadeAtualizada)
     {
         Titulo = entidadeAtualizada.Titulo;
