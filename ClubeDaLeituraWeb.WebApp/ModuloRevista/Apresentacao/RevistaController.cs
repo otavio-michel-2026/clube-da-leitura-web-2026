@@ -144,15 +144,22 @@ public class RevistaController : Controller
     }
 
     [HttpPost]
-    public ActionResult Excluir(RevistaMostrarViewModel excluirVm)
+    public ActionResult Excluir(RevistaMostrarViewModel vm)
     {
-        Revista? revista = repositorioRevista.SelecionarPorId(excluirVm.Id);
+        Revista? revista = repositorioRevista.SelecionarPorId(vm.Id);
 
-        if (revista != null)
+        if (revista is null)
+            return RedirectToAction(nameof(Listar));
+
+        if (revista.StatusRevista == StatusRevista.Emprestada)
         {
-            revista.Caixa.RetirarRevistaDaCaixa(revista);
-            repositorioRevista.Excluir(revista);
+            ViewBag.Erro = "Esta revista está emprestada";
+            return View(vm);
         }
+
+        revista.Caixa.RetirarRevistaDaCaixa(revista);
+        repositorioRevista.Excluir(revista);
+        
         return RedirectToAction(nameof(Listar));
     }
 

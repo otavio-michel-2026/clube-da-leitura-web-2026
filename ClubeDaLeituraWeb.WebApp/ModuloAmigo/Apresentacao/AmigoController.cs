@@ -57,7 +57,7 @@ namespace ClubeDaLeituraWeb.WebApp.ModuloAmigo.Apresentacao
         {
             Amigo? amigo = repositorioAmigo.SelecionarPorId(id);
 
-            if (amigo == null)
+            if (amigo is null)
                 return RedirectToAction(nameof(Listar));
 
             AmigoViewModel vm = new(
@@ -98,7 +98,7 @@ namespace ClubeDaLeituraWeb.WebApp.ModuloAmigo.Apresentacao
         {
             Amigo? amigo = repositorioAmigo.SelecionarPorId(id);
 
-            if (amigo == null)
+            if (amigo is null)
                 return RedirectToAction(nameof(Listar));
 
             AmigoViewModel vm = new(
@@ -116,8 +116,16 @@ namespace ClubeDaLeituraWeb.WebApp.ModuloAmigo.Apresentacao
         {
             Amigo? amigo = repositorioAmigo.SelecionarPorId(vm.Id);
 
-            if (amigo != null)
-                repositorioAmigo.Excluir(amigo);
+            if (amigo is null)
+                return RedirectToAction(nameof(Listar));
+
+            if (amigo.Emprestimos.Count != 0)
+            {
+                ViewBag.Erro = "Esse amigo tem empréstimo aberto";
+                return View(vm);
+            }
+
+            repositorioAmigo.Excluir(amigo);
 
             return RedirectToAction(nameof(Listar));
         }

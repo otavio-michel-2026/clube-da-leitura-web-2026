@@ -8,9 +8,15 @@
     Deseja realmente excluir esse amigo?
 </div>
 
-<form class="card border-primary-subtle shadow-sm mx-auto p-4" style="max-width: 620px;" asp-action="Excluir"
-      asp-route-id="@Model.Id" method="post">
-
+<form class="card border-primary-subtle shadow-sm mx-auto p-4" style="max-width: 620px;"  asp-action="Excluir" asp-route-id="@Model.Id" method="post">
+    
+    @if(ViewBag.Erro is string)
+    {
+        <div class="alert alert-primary border-start border-primary border-2 rounded-3" role="alert">
+            @ViewBag.Erro
+        </div>
+    }
+    
     <div class="mb-3">
         <label asp-for="Id" class="form-label fw-semibold text-primary text-uppercase small">Id</label>
         <input asp-for="Id" type="text" disabled class="form-control">
@@ -24,17 +30,16 @@
     </div>
 
     <div class="mb-3">
-        <label asp-for="NomeResponsavel" class="form-label fw-semibold text-primary text-uppercase small">Nome do
-            Responsável</label>
-            <input asp-for="NomeResponsavel" type="text" disabled class="form-control">
-            <input asp-for="NomeResponsavel" type="hidden">
-        </div>
+        <label asp-for="NomeResponsavel" class="form-label fw-semibold text-primary text-uppercase small">Nome do Responsável</label>
+        <input asp-for="NomeResponsavel" type="text" disabled class="form-control">
+        <input asp-for="NomeResponsavel" type="hidden">
+    </div>
 
-        <div class="mb-3">
-            <label asp-for="Telefone" class="form-label fw-semibold text-primary text-uppercase small">Telefone</label>
-            <input asp-for="Telefone" type="text" disabled class="form-control">
-            <input asp-for="Telefone" type="hidden">
-        </div>
+    <div class="mb-3">
+        <label asp-for="Telefone" class="form-label fw-semibold text-primary text-uppercase small">Telefone</label>
+        <input asp-for="Telefone" type="text" disabled class="form-control">
+        <input asp-for="Telefone" type="hidden">
+    </div>
 
         <div class="d-flex justify-content-end gap-2 mt-4">
             <a class="btn btn-outline-primary rounded-pill px-4" asp-action="Listar">Voltar</a>
