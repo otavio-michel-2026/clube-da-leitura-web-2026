@@ -14,5 +14,7 @@ public record CaixaViewModel
     [Range(1, int.MaxValue, ErrorMessage = "O campo \"Dias de Empréstimo\" deve conter um valor maior que 0.")]
     int DiasDeEmprestimo,
 
+    int QtdRevistas,
+
     string Id = ""
 );

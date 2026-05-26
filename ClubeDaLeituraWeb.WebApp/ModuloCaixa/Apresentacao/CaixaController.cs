@@ -17,7 +17,7 @@ public class CaixaController : Controller
     public ActionResult Listar()
     {
         var vms = repositorioCaixa.SelecionarTodos()
-            .Select(c => new CaixaViewModel(c.Etiqueta, c.Cor, c.DiasDeEmprestimo, c.Id)).ToList();
+            .Select(c => new CaixaViewModel(c.Etiqueta, c.Cor, c.DiasDeEmprestimo, c.QtdRevistas, c.Id)).ToList();
 
         return View(vms);
     }
@@ -28,6 +28,7 @@ public class CaixaController : Controller
         CaixaViewModel caixa = new CaixaViewModel(
             string.Empty,
             string.Empty,
+            0,
             7
         );
 
@@ -63,6 +64,7 @@ public class CaixaController : Controller
             caixa.Etiqueta,
             caixa.Cor,
             caixa.DiasDeEmprestimo,
+            caixa.QtdRevistas,
             id
         );
 
@@ -98,6 +100,7 @@ public class CaixaController : Controller
         caixa.Etiqueta,
         caixa.Cor,
         caixa.DiasDeEmprestimo,
+        caixa.QtdRevistas,
         id
     );
 
@@ -109,7 +112,7 @@ public class CaixaController : Controller
     {
         Caixa? caixa = repositorioCaixa.SelecionarPorId(excluirVm.Id);
 
-        if (caixa != null)
+        if (caixa != null && caixa!.QtdRevistas == 0)
             repositorioCaixa.Excluir(caixa);
 
         return RedirectToAction(nameof(Listar));

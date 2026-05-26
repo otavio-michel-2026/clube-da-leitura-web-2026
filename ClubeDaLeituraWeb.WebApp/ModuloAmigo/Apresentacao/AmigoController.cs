@@ -69,7 +69,7 @@ namespace ClubeDaLeituraWeb.WebApp.ModuloAmigo.Apresentacao
         {
             if (!ModelState.IsValid)
                 return View(vm);
-                
+
             Amigo amigoEditado = new(
                 vm.Nome,
                 vm.NomeResponsavel,

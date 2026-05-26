@@ -17,24 +17,29 @@
     </div>
 
     <div class="mb-3">
-        <label asp-for="Etiqueta" class="form-label fw-semibold text-primary text-uppercase small">Nome</label>
+        <label asp-for="Etiqueta" class="form-label fw-semibold text-primary text-uppercase small">Etiqueta</label>
         <input asp-for="Etiqueta" type="text" disabled class="form-control">
     </div>
 
     <div class="mb-3">
-        <label asp-for="Cor" class="form-label fw-semibold text-primary text-uppercase small">Nome do
-            Responsável</label>
-            <input asp-for="Cor" type="text" disabled class="form-control">
-        </div>
+        <label asp-for="Cor" class="form-label fw-semibold text-primary text-uppercase small">Cor</label>
+        <input asp-for="Cor" type="text" disabled class="form-control">
+    </div>
 
-        <div class="mb-3">
-            <label asp-for="DiasDeEmprestimo"
-                   class="form-label fw-semibold text-primary text-uppercase small">Telefone</label>
+    <div class="mb-3">
+        <label asp-for="DiasDeEmprestimo" class="form-label fw-semibold text-primary text-uppercase small">Dias de
+            Empréstimo</label>
             <input asp-for="DiasDeEmprestimo" type="text" disabled class="form-control">
         </div>
 
-        <div class="d-flex justify-content-end gap-2 mt-4">
-            <a class="btn btn-outline-primary rounded-pill px-4" asp-action="Listar">Voltar</a>
-            <button class="btn btn-primary rounded-pill px-4" type="submit">Confirmar</button>
-        </div>
-    </form>
+        <div class="mb-3">
+            <label asp-for="QtdRevistas" class="form-label fw-semibold text-primary text-uppercase small">Quantidade de
+                Revistas</label>
+                <input asp-for="QtdRevistas" type="text" disabled class="form-control">
+            </div>
+
+            <div class="d-flex justify-content-end gap-2 mt-4">
+                <a class="btn btn-outline-primary rounded-pill px-4" asp-action="Listar">Voltar</a>
+                <button class="btn btn-primary rounded-pill px-4" type="submit">Confirmar</button>
+            </div>
+        </form>
