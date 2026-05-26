@@ -12,10 +12,24 @@ public record RevistaViewModel
     [Range(1, int.MaxValue, ErrorMessage = "O campo \"NumeroDeEdicao\" deve ser positivo (maior que zero).")]
     uint NumeroDeEdicao,
 
-    [Range(1600, 2100, ErrorMessage = "O campo \"Dias de Empréstimo\" deve ser um ano valido")]
+    [Range(1600, 2026, ErrorMessage = "O campo \"Dias de Empréstimo\" deve ser um ano valido")]
     int AnoDePublicacao,
 
-    string Id = "",
+    [Required(ErrorMessage = "O campo \"Caixa\" deve ser preenchido.")]
+    string CaixaId,
 
-    Caixa? Caixa = null
+    string Id = ""
+);
+
+public record RevistaMostrarViewModel
+(
+    string Titulo,
+
+    uint NumeroDeEdicao,
+
+    int AnoDePublicacao,
+
+    string Caixa,
+
+    string Id
 );

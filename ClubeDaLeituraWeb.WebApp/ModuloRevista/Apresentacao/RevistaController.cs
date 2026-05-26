@@ -1,25 +1,26 @@
 using ClubeDaLeituraWeb.WebApp.ModuloCaixa.Dominio;
 using ClubeDaLeituraWeb.WebApp.ModuloRevista.Apresentacao;
 using ClubeDaLeituraWeb.WebApp.ModuloRevista.Dominio;
-using ClubeDaLeituraWeb.WebApp.ModuloRevista.Infra;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ClubeDaLeituraWeb.WebApp.Modulorevista.Apresentacao;
 
 public class RevistaController : Controller
 {
     private readonly IRepositorioRevista repositorioRevista;
-
-    public RevistaController(IRepositorioRevista repositorioRevista)
+    private readonly IRepositorioCaixa repositorioCaixa;
+    public RevistaController(IRepositorioRevista repositorioRevista, IRepositorioCaixa repositorioCaixa)
     {
         this.repositorioRevista = repositorioRevista;
+        this.repositorioCaixa = repositorioCaixa;
     }
 
     [HttpGet]
     public ActionResult Listar()
     {
         var vms = repositorioRevista.SelecionarTodos()
-            .Select(c => new RevistaViewModel(c.Titulo, c.NumeroDeEdicao, c.AnoDePublicacao, c.Id)).ToList();
+            .Select(c => new RevistaMostrarViewModel(c.Titulo, c.NumeroDeEdicao, c.AnoDePublicacao, c.Caixa.Etiqueta, c.Id)).ToList();
 
         return View(vms);
     }
@@ -27,25 +28,37 @@ public class RevistaController : Controller
     [HttpGet]
     public ActionResult Cadastrar()
     {
+        ViewBag.Caixas = CarregarCaixas();
+
         RevistaViewModel revista = new RevistaViewModel(
             string.Empty,
             0,
-            0
+            1600,
+            string.Empty
         );
 
         return View(revista);
     }
 
     [HttpPost]
-    public ActionResult Cadastrar(RevistaViewModel revista)
+    public ActionResult Cadastrar(RevistaViewModel vm)
     {
+        Caixa? caixa = repositorioCaixa.SelecionarPorId(vm.CaixaId);
+
+        if (caixa is null || vm.CaixaId == string.Empty)
+            ModelState.AddModelError(nameof(vm.CaixaId), "Selecione uma caixa valida");
+
         if (!ModelState.IsValid)
-            return View(revista);
+        {
+            ViewBag.Caixas = CarregarCaixas();
+            return View(vm);
+        }
 
         Revista novarevista = new(
-        revista.Titulo,
-        revista.NumeroDeEdicao,
-        revista.AnoDePublicacao
+        vm.Titulo,
+        vm.NumeroDeEdicao,
+        vm.AnoDePublicacao,
+        caixa!
     );
 
         repositorioRevista.Cadastrar(novarevista);
@@ -56,6 +69,8 @@ public class RevistaController : Controller
     [HttpGet]
     public ActionResult Editar(string id)
     {
+        ViewBag.Caixas = CarregarCaixas();
+
         Revista? revista = repositorioRevista.SelecionarPorId(id);
 
         if (revista == null)
@@ -65,6 +80,7 @@ public class RevistaController : Controller
             revista.Titulo,
             revista.NumeroDeEdicao,
             revista.AnoDePublicacao,
+            revista.Caixa.Id,
             id
         );
 
@@ -72,18 +88,27 @@ public class RevistaController : Controller
     }
 
     [HttpPost]
-    public ActionResult Editar(RevistaViewModel revista)
+    public ActionResult Editar(RevistaViewModel vm)
     {
+        Caixa? caixa = repositorioCaixa.SelecionarPorId(vm.CaixaId);
+
+        if (caixa is null || vm.CaixaId == string.Empty)
+            ModelState.AddModelError(nameof(vm.CaixaId), "Selecione uma caixa valida");
+
         if (!ModelState.IsValid)
-            return View(revista);
+        {
+            ViewBag.Caixas = CarregarCaixas();
+            return View(vm);
+        }
 
         Revista novarevista = new Revista(
-        revista.Titulo,
-        revista.NumeroDeEdicao,
-        revista.AnoDePublicacao
-    );
+        vm.Titulo,
+        vm.NumeroDeEdicao,
+        vm.AnoDePublicacao,
+        caixa!
+        );
 
-        repositorioRevista.Editar(revista.Id, novarevista);
+        repositorioRevista.Editar(vm.Id, novarevista);
 
         return RedirectToAction(nameof(Listar));
     }
@@ -96,10 +121,11 @@ public class RevistaController : Controller
         if (revista == null)
             return RedirectToAction(nameof(Listar));
 
-        RevistaViewModel excluirVm = new RevistaViewModel(
+        RevistaMostrarViewModel excluirVm = new RevistaMostrarViewModel(
         revista.Titulo,
         revista.NumeroDeEdicao,
         revista.AnoDePublicacao,
+        revista.Caixa.Etiqueta,
         id
     );
 
@@ -107,7 +133,7 @@ public class RevistaController : Controller
     }
 
     [HttpPost]
-    public ActionResult Excluir(RevistaViewModel excluirVm)
+    public ActionResult Excluir(RevistaMostrarViewModel excluirVm)
     {
         Revista? revista = repositorioRevista.SelecionarPorId(excluirVm.Id);
 
@@ -115,5 +141,10 @@ public class RevistaController : Controller
             repositorioRevista.Excluir(revista);
 
         return RedirectToAction(nameof(Listar));
+    }
+
+    private List<SelectListItem> CarregarCaixas()
+    {
+        return repositorioCaixa.SelecionarTodos().Select(c => new SelectListItem(c.Etiqueta, c.Id)).ToList();
     }
 }

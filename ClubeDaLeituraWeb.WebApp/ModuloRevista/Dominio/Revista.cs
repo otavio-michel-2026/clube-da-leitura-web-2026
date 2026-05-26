@@ -6,22 +6,26 @@ namespace ClubeDaLeituraWeb.WebApp.ModuloRevista.Dominio;
 public class Revista : EntidadeBase<Revista>
 {
     public string Titulo { get; set; } = string.Empty;
-    public uint NumeroDeEdicao { get; set; } = 0;
-    public int AnoDePublicacao { get; set; } = 0;
-    public Caixa? Caixa { get; set; } = null;
+    public uint NumeroDeEdicao { get; set; }
+    public int AnoDePublicacao { get; set; }
+    public Caixa Caixa { get; set; } = null!;
+
+    public Revista() { }
 
     public Revista
     (
         string titulo,
         uint numeroDeEdicao,
         int anoDePublicacao,
-        Caixa? caixa = null
+        Caixa caixa
     )
     {
         Titulo = titulo;
         NumeroDeEdicao = numeroDeEdicao;
         AnoDePublicacao = anoDePublicacao;
+        Caixa = caixa;
     }
+
     public override void AtualizarDados(Revista entidadeAtualizada)
     {
         Titulo = entidadeAtualizada.Titulo;

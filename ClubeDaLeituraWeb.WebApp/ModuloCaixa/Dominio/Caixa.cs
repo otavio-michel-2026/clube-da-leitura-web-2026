@@ -8,6 +8,7 @@ public class Caixa : EntidadeBase<Caixa>
     public string Cor { get; set; } = string.Empty;
     public int DiasDeEmprestimo { get; set; } = 7;
 
+    public Caixa() { }
     public Caixa(string etiqueta, string cor, int diasDeEmprestimo)
     {
         Etiqueta = etiqueta;

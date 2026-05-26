@@ -1,4 +1,5 @@
 @{
+    List<SelectListItem> selecionarCaixas = ViewBag.Caixas;
     ViewBag.Titulo = "Edição de Revista";
 }
 
@@ -29,9 +30,11 @@
             </div>
 
             <div class="mb-3">
-                <label asp-for="Caixa" class="form-label fw-semibold text-primary text-uppercase small">Caixa</label>
-                <input asp-for="Caixa" type="number" class="form-control">
-                <span asp-validation-for="Caixa" class="text-danger small fw-semibold"></span>
+                <label asp-for="CaixaId" class="form-label fw-semibold text-primary text-uppercase small">Caixa</label>
+                <select asp-for="CaixaId" asp-items="selecionarCaixas" type="text" class="form-control">
+                    <option value="">Selecione uma Caixa</option>
+                </select>
+                <span asp-validation-for="CaixaId" class="text-danger small fw-semibold"></span>
             </div>
 
             <div class="d-flex justify-content-end gap-2 mt-4">
