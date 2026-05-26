@@ -97,7 +97,7 @@ namespace ClubeDaLeituraWeb.WebApp.ModuloAmigo.Apresentacao
             return View(vm);
         }
 
-        [HttpPost]
+        [HttpPost("Excluir")]
         public ActionResult Excluir(AmigoViewModel vm)
         {
             Amigo? amigo = repositorioAmigo.SelecionarPorId(vm.Id);
