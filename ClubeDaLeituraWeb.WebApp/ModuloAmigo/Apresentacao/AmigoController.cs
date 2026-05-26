@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ClubeDaLeituraWeb.WebApp.ModuloAmigo.Apresentacao
 {
-    [Route("Amigos")]
     public class AmigoController : Controller
     {
         private readonly IRepositorioAmigo repositorioAmigo;
@@ -13,7 +12,7 @@ namespace ClubeDaLeituraWeb.WebApp.ModuloAmigo.Apresentacao
             this.repositorioAmigo = repositorioAmigo;
         }
 
-        [HttpGet("Listar")]
+        [HttpGet]
         public ActionResult Listar()
         {
             var vms = repositorioAmigo.SelecionarTodos()
@@ -22,7 +21,7 @@ namespace ClubeDaLeituraWeb.WebApp.ModuloAmigo.Apresentacao
             return View(vms);
         }
 
-        [HttpGet("Cadastrar")]
+        [HttpGet]
         public ActionResult Cadastrar()
         {
             AmigoViewModel vm = new(string.Empty, string.Empty, string.Empty);
@@ -30,7 +29,7 @@ namespace ClubeDaLeituraWeb.WebApp.ModuloAmigo.Apresentacao
             return View(vm);
         }
 
-        [HttpPost("Cadastrar")]
+        [HttpPost]
         public ActionResult Cadastrar(AmigoViewModel vm)
         {
             if (!ModelState.IsValid)
@@ -47,7 +46,7 @@ namespace ClubeDaLeituraWeb.WebApp.ModuloAmigo.Apresentacao
             return RedirectToAction(nameof(Listar));
         }
 
-        [HttpGet("Editar")]
+        [HttpGet]
         public ActionResult Editar(string id)
         {
             Amigo? amigo = repositorioAmigo.SelecionarPorId(id);
@@ -65,7 +64,7 @@ namespace ClubeDaLeituraWeb.WebApp.ModuloAmigo.Apresentacao
             return View(vm);
         }
 
-        [HttpPost("Editar")]
+        [HttpPost]
         public ActionResult Editar(AmigoViewModel vm)
         {
             Amigo amigoEditado = new(
@@ -79,7 +78,7 @@ namespace ClubeDaLeituraWeb.WebApp.ModuloAmigo.Apresentacao
             return RedirectToAction(nameof(Listar));
         }
 
-        [HttpGet("Excluir")]
+        [HttpGet]
         public ActionResult Excluir(string id)
         {
             Amigo? amigo = repositorioAmigo.SelecionarPorId(id);
@@ -97,7 +96,7 @@ namespace ClubeDaLeituraWeb.WebApp.ModuloAmigo.Apresentacao
             return View(vm);
         }
 
-        [HttpPost("Excluir")]
+        [HttpPost]
         public ActionResult Excluir(AmigoViewModel vm)
         {
             Amigo? amigo = repositorioAmigo.SelecionarPorId(vm.Id);
