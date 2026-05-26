@@ -1,6 +1,5 @@
 using ClubeDaLeituraWeb.WebApp.ModuloCaixa.Dominio;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualBasic;
 
 namespace ClubeDaLeituraWeb.WebApp.ModuloCaixa.Apresentacao;
 
