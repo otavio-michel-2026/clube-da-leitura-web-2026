@@ -15,7 +15,7 @@ public record RevistaViewModel
     [Range(1600, 2100, ErrorMessage = "O campo \"Dias de Empréstimo\" deve ser um ano valido")]
     int AnoDePublicacao,
 
-    Caixa? Caixa = null,
+    string Id = "",
 
-    string Id = ""
+    Caixa? Caixa = null
 );
