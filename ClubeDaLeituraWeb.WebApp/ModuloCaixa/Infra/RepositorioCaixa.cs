@@ -1,13 +1,14 @@
 using ClubeDaLeituraWeb.WebApp.Compartilhado.Infra.Arquivos;
 using ClubeDaLeituraWeb.WebApp.ModuloCaixa.Dominio;
 
-namespace ClubeDaLeituraWeb.WebApp.ModuloCaixa.Infra;
-
-public class RepositrioCaixaEmArquivo : RepositorioBaseEmArquivo<Caixa>, IRepositorioCaixa
+namespace ClubeDaLeituraWeb.WebApp.ModuloCaixa.Infra
 {
-    public RepositrioCaixaEmArquivo(ContextoJson contexto) : base(contexto) { }
-    protected override List<Caixa> CarregarRegistros()
+    public class RepositorioCaixaEmArquivo : RepositorioBaseEmArquivo<Caixa>, IRepositorioCaixa
     {
-        return contexto.Caixas;
+        public RepositorioCaixaEmArquivo(ContextoJson contexto) : base(contexto) { }
+        protected override List<Caixa> CarregarRegistros()
+        {
+            return contexto.Caixas;
+        }
     }
 }

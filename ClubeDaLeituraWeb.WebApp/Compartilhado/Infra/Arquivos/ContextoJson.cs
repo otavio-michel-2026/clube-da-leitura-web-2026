@@ -6,7 +6,7 @@ namespace ClubeDaLeituraWeb.WebApp.Compartilhado.Infra.Arquivos;
 
 public sealed class ContextoJson
 {
-    public List<Caixa> Caixas = new List<Caixa>();
+    public List<Caixa> Caixas = [];
     private readonly string caminhoArquivo;
 
     public ContextoJson()

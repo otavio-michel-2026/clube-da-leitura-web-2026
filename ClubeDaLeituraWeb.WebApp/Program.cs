@@ -19,7 +19,7 @@ public class Program
             return contextoJson;
         });
 
-        builder.Services.AddScoped<IRepositorioCaixa, RepositrioCaixaEmArquivo>();
+        builder.Services.AddScoped<IRepositorioCaixa, RepositorioCaixaEmArquivo>();
 
         // Configuração de Serviços
         builder.Services.AddControllersWithViews().AddRazorOptions(options =>

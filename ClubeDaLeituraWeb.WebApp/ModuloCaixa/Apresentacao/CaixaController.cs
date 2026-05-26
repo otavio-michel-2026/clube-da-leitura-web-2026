@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using ClubeDaLeituraWeb.WebApp.ModuloCaixa.Dominio;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +16,8 @@ public class CaixaController : Controller
     [HttpGet]
     public ActionResult Listar()
     {
-        var vms = repositorioCaixa.SelecionarTodos().Select(c => new CaixaViewModel(c.Etiqueta, c.Cor, c.DiasDeEmprestimo, c.Id));
+        var vms = repositorioCaixa.SelecionarTodos()
+            .Select(c => new CaixaViewModel(c.Etiqueta, c.Cor, c.DiasDeEmprestimo, c.Id)).ToList();
 
         return View(vms);
     }
@@ -38,7 +40,7 @@ public class CaixaController : Controller
         if (!ModelState.IsValid)
             return View(caixa);
 
-        Caixa novaCaixa = new Caixa(
+        Caixa novaCaixa = new(
             caixa.Etiqueta,
             caixa.Cor,
             caixa.DiasDeEmprestimo
