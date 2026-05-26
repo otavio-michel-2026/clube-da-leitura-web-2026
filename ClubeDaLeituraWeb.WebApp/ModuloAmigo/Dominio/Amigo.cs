@@ -1,4 +1,3 @@
-using System.Text.RegularExpressions;
 using ClubeDaLeituraWeb.WebApp.Compartilhado.Dominio;
 
 namespace ClubeDaLeituraWeb.WebApp.ModuloAmigo.Dominio;
