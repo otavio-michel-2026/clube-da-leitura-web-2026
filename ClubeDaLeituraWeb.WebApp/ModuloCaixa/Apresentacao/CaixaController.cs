@@ -17,7 +17,7 @@ public class CaixaController : Controller
     public ActionResult Listar()
     {
         var vms = repositorioCaixa.SelecionarTodos()
-            .Select(c => new CaixaViewModel(c.Etiqueta, c.Cor, c.DiasDeEmprestimo, c.Revistas.Count, c.Id)).ToList();
+            .Select(c => new CaixaMostrarViewModel(c.Etiqueta, c.Cor, c.DiasDeEmprestimo, c.Revistas.Count, c.Id)).ToList();
 
         return View(vms);
     }
@@ -77,7 +77,7 @@ public class CaixaController : Controller
     [HttpPost]
     public ActionResult Editar(CaixaViewModel vm)
     {
-        if (repositorioCaixa.SelecionarTodos().Any(c => c.Etiqueta == vm.Etiqueta))
+        if (repositorioCaixa.SelecionarTodos().Where(c => c.Id != vm.Id).Any(c => c.Etiqueta == vm.Etiqueta))
             ModelState.AddModelError(nameof(vm.Etiqueta), "Ja existe uma Caixa com essa Etiqueta");
 
         if (!ModelState.IsValid)
@@ -102,7 +102,7 @@ public class CaixaController : Controller
         if (caixa == null)
             return RedirectToAction(nameof(Listar));
 
-        CaixaViewModel excluirVm = new CaixaViewModel(
+        CaixaMostrarViewModel excluirVm = new(
         caixa.Etiqueta,
         caixa.Cor,
         caixa.DiasDeEmprestimo,
@@ -114,7 +114,7 @@ public class CaixaController : Controller
     }
 
     [HttpPost]
-    public ActionResult Excluir(CaixaViewModel excluirVm)
+    public ActionResult Excluir(CaixaMostrarViewModel excluirVm)
     {
         Caixa? caixa = repositorioCaixa.SelecionarPorId(excluirVm.Id);
 
@@ -122,7 +122,7 @@ public class CaixaController : Controller
             return RedirectToAction(nameof(Listar));
 
         if (caixa.Revistas.Count != 0)
-            ModelState.AddModelError(nameof(excluirVm.Id), "Essa Caixa contem revistas");
+            ViewBag.Erro = "Esssa caixa contem revistas";
 
         if (!ModelState.IsValid)
             return View(excluirVm);

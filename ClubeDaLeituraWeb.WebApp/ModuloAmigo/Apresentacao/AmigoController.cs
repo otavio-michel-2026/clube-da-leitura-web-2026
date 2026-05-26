@@ -73,7 +73,7 @@ namespace ClubeDaLeituraWeb.WebApp.ModuloAmigo.Apresentacao
         [HttpPost]
         public ActionResult Editar(AmigoViewModel vm)
         {
-            if (repositorioAmigo.SelecionarTodos().Any(a => a.Nome == vm.Nome && a.Telefone == vm.Telefone))
+            if (repositorioAmigo.SelecionarTodos().Where(r => r.Id != vm.Id).Any(a => a.Nome == vm.Nome && a.Telefone == vm.Telefone))
             {
                 ModelState.AddModelError(nameof(vm.Nome), "Ja existe um Amigo com esse nome e telefone");
                 ModelState.AddModelError(nameof(vm.Telefone), "Ja existe um Amigo com essa nome e telefone");

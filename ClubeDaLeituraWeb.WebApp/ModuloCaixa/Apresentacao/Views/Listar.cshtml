@@ -2,7 +2,7 @@
     ViewBag.Titulo = "Listagem de Caixas";
 }
 
-@model List<CaixaViewModel>
+@model List<CaixaMostrarViewModel>
 
 
 <a class="btn btn-outline-primary rounded-pill px-4 mb-3" asp-action="Cadastrar">Cadastrar Novo</a>
@@ -29,7 +29,7 @@ else
             </thead>
 
             <tbody>
-                @foreach (CaixaViewModel c in Model)
+                @foreach (CaixaMostrarViewModel c in Model)
                 {
                     <tr>
                         <td>@c.Id</td>

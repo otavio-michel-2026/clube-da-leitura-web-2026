@@ -18,3 +18,15 @@ public record CaixaViewModel
 
     string Id = ""
 );
+public record CaixaMostrarViewModel
+(
+    string Etiqueta,
+
+    string Cor,
+
+    int DiasDeEmprestimo,
+
+    int QtdRevistas,
+
+    string Id
+);
