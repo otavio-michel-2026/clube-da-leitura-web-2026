@@ -14,8 +14,12 @@ public class RepositorioEmprestimo : RepositorioBaseEmArquivo<Emprestimo>, IRepo
 
     public void Devolver(Emprestimo emprestimo)
     {
-        emprestimo.Revista.DevolverRevista();
         emprestimo.ConcluirEmprestimo();
+        contexto.Salvar();
+    }
+    public void QuitarMulta(Emprestimo emprestimo)
+    {
+        emprestimo.QuitarMulta();
         contexto.Salvar();
     }
 }

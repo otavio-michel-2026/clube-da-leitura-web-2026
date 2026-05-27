@@ -11,6 +11,7 @@ public class Emprestimo : EntidadeBase<Emprestimo>
     public Revista Revista { get; set; } = null!;
     public DateTime DataEmprestimo { get; set; } = DateTime.Now;
     public DateTime DataDevolucao { get; set; }
+    public DateTime? DataDevolvido { get; set; }
     private StatusEmprestimo status;
     public StatusEmprestimo StatusEmprestimo
     {
@@ -23,6 +24,20 @@ public class Emprestimo : EntidadeBase<Emprestimo>
         set
         {
             status = value;
+        }
+    }
+
+    private bool multaEstaPaga = false;
+    public StatusMulta StatusMulta
+    {
+        get
+        {
+            if (multaEstaPaga)
+                return StatusMulta.Quitada;
+            else if (StatusEmprestimo == StatusEmprestimo.Atrasado || StatusEmprestimo == StatusEmprestimo.ConcluidoAtrasado)
+                return StatusMulta.Pendente;
+            else
+                return StatusMulta.SemMulta;
         }
     }
 
@@ -40,7 +55,21 @@ public class Emprestimo : EntidadeBase<Emprestimo>
 
     public void ConcluirEmprestimo()
     {
-        StatusEmprestimo = StatusEmprestimo.Concluído;
+        Revista.DevolverRevista();
+        DataDevolvido = DateTime.Now;
+        StatusEmprestimo = StatusEmprestimo.Concluido;
+    }
+
+    public decimal CalcularMulta()
+    {
+        DateOnly data = DateOnly.FromDateTime(DataDevolvido ?? DateTime.Now);
+        int dias = data.DayNumber - DateOnly.FromDateTime(DataDevolucao).DayNumber;
+        return dias > 0 ? dias * 2.0m : 0;
+    }
+
+    public void QuitarMulta()
+    {
+        multaEstaPaga = true;
     }
 
     public override void AtualizarDados(Emprestimo entidadeAtualizada)
@@ -59,4 +88,5 @@ public class Emprestimo : EntidadeBase<Emprestimo>
             DataDevolucao = DataEmprestimo.AddDays(Revista.Caixa.DiasDeEmprestimo);
         }
     }
+    
 }
