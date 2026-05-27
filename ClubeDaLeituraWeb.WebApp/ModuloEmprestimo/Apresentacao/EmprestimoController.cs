@@ -25,7 +25,7 @@ namespace ClubeDaLeituraWeb.WebApp.ModuloEmprestimo.Apresentacao
         public ActionResult Listar()
         {
             var vms = repositorioEmprestimo.SelecionarTodos()
-                .Select(e => new EmprestimoMostrarViewModel(e.Amigo.Nome, e.Revista.Titulo, e.DataEmprestimo, e.DataDevolucao, e.StatusEmprestimo.ToString(), e.Id))
+                .Select(e => new EmprestimoMostrarViewModel(e.Amigo.Nome, e.Revista.Titulo, e.DataEmprestimo, e.DataDevolucao, e.StatusEmprestimo, e.Id))
                 .ToList();
 
             return View(vms);

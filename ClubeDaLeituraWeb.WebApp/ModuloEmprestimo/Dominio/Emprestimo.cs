@@ -16,7 +16,7 @@ public class Emprestimo : EntidadeBase<Emprestimo>
     {
         get
         {
-            if (status == StatusEmprestimo.Aberto && DataEmprestimo > DataDevolucao)
+            if (status == StatusEmprestimo.Aberto && DateTime.Now > DataDevolucao)
                 return StatusEmprestimo.Atrasado;
             else return status;
         }

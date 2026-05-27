@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using ClubeDaLeituraWeb.WebApp.ModuloEmprestimo.Dominio;
 
 namespace ClubeDaLeituraWeb.WebApp.ModuloEmprestimo.Apresentacao;
 
@@ -17,7 +18,7 @@ public record EmprestimoMostrarViewModel(
     string Revista,
     DateTime DataEmprestimo,
     DateTime DataDevolucao,
-    string StatusEmprestimo,
+    StatusEmprestimo StatusEmprestimo,
     string Id
 );
 

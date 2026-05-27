@@ -35,9 +35,18 @@ else
                         <td>@e.Id</td>
                         <td>@e.Amigo</td>
                         <td>@e.Revista</td>
-                        <td>@e.DataDevolucao.ToString("dd/MM/yyyy")</td>
                         <td>@e.DataEmprestimo.ToString("dd/MM/yyyy")</td>
-                        <td>@e.StatusEmprestimo.ToString()</td>
+                        <td>@e.DataDevolucao.ToString("dd/MM/yyyy")</td>
+                        <td>
+                            @if (e.StatusEmprestimo == StatusEmprestimo.Atrasado)
+                            {
+                                <strong>@e.StatusEmprestimo</strong>
+                            }
+                            else
+                            {
+                                @e.StatusEmprestimo
+                            }
+                        </td>
                         <td>
                             <div class="d-flex gap-2">
                                 <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="Devolver" asp-route-id="@e.Id">Devolver</a>
