@@ -1,0 +1,52 @@
+@{
+    ViewBag.Titulo = "Listagem de Reservas";
+}
+
+@model List<ReservaMostrarViewModel>;
+
+<a class="btn btn-outline-primary rounded-pill px-4 mb-3" asp-action="Cadastrar">Cadastrar Novo</a>
+
+@if (Model.Count == 0)
+{
+    <div class="alert alert-primary border-start border-primary border-2 rounded-3" role="alert">
+        Nenhuma reserva cadastrado.
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered align-middle bg-white">
+            <thead class="table-primary">
+                <tr>
+                    <th>ID</th>
+                    <th>Amigo</th>
+                    <th>Revista</th>
+                    <th>Data de reserva</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var e in Model)
+                {
+                    <tr>
+                        <td>@e.Id</td>
+                        <td>@e.Amigo</td>
+                        <td>@e.Revista</td>
+                        <td>@e.Data.ToString("dd/MM/yyyy")</td>
+                        <td>@e.Status.ToString()</td>
+                        <td>
+                            <div class="d-flex gap-2">
+                                <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="Cancelar"
+                                   asp-route-id="@e.Id">Cancelar</a>
+                                <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="Concluir"
+                                   asp-route-id="@e.Id">Concluir</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
