@@ -38,6 +38,9 @@ public class ReservaController : Controller
     [HttpGet]
     public ActionResult Cadastrar()
     {
+        ViewBag.Amigos = CarregarAmigos();
+        ViewBag.Revistas = CarregarRevistas();
+
         ReservaViewModel vm = new(
             string.Empty,
             string.Empty
