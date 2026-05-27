@@ -16,15 +16,19 @@ public class Reserva : EntidadeBase<Reserva>
     {
         Amigo = amigo;
         Revista = revista;
-        StatusReserva = StatusReserva.Ativa;
+        StatusReserva = StatusReserva.Aberta;
     }
     public override void AtualizarDados(Reserva entidadeAtualizada)
     {
         Amigo = entidadeAtualizada.Amigo;
         Revista = entidadeAtualizada.Revista;
     }
-    public void ConcluirReserva()
+    public void ConverterParaEmprestimo()
     {
         StatusReserva = StatusReserva.Concluida;
+    }
+    public void CancelarReserva()
+    {
+        StatusReserva = StatusReserva.Cancelada;
     }
 }
