@@ -19,6 +19,8 @@ public class RepositorioEmprestimo : RepositorioBaseEmArquivo<Emprestimo>, IRepo
     }
     public void QuitarMulta(Emprestimo emprestimo)
     {
+        if (emprestimo.StatusEmprestimo == StatusEmprestimo.Atrasado)
+            emprestimo.ConcluirEmprestimo();
         emprestimo.QuitarMulta();
         contexto.Salvar();
     }

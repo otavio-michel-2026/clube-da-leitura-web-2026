@@ -12,32 +12,36 @@ public class Emprestimo : EntidadeBase<Emprestimo>
     public DateTime DataEmprestimo { get; set; } = DateTime.Now;
     public DateTime DataDevolucao { get; set; }
     public DateTime? DataDevolvido { get; set; }
-    private StatusEmprestimo status;
+    private StatusEmprestimo statusEmprestimo;
     public StatusEmprestimo StatusEmprestimo
     {
         get
         {
-            if (status == StatusEmprestimo.Aberto && DateTime.Now > DataDevolucao)
+            if (statusEmprestimo == StatusEmprestimo.Aberto && DateTime.Now > DataDevolucao)
                 return StatusEmprestimo.Atrasado;
-            else return status;
+            else return statusEmprestimo;
         }
         set
         {
-            status = value;
+            statusEmprestimo = value;
         }
     }
 
-    private bool multaEstaPaga = false;
+    private StatusMulta statusMulta;
     public StatusMulta StatusMulta
     {
         get
         {
-            if (multaEstaPaga)
+            if (statusMulta == StatusMulta.Quitada)
                 return StatusMulta.Quitada;
             else if (StatusEmprestimo == StatusEmprestimo.Atrasado || StatusEmprestimo == StatusEmprestimo.ConcluidoAtrasado)
                 return StatusMulta.Pendente;
             else
                 return StatusMulta.SemMulta;
+        }
+        set
+        {
+            statusMulta = value;
         }
     }
 
@@ -57,7 +61,7 @@ public class Emprestimo : EntidadeBase<Emprestimo>
     {
         Revista.DevolverRevista();
         DataDevolvido = DateTime.Now;
-        StatusEmprestimo = StatusEmprestimo.Concluido;
+        StatusEmprestimo = StatusEmprestimo == StatusEmprestimo.Atrasado ? StatusEmprestimo.ConcluidoAtrasado : StatusEmprestimo.Concluido;
     }
 
     public decimal CalcularMulta()
@@ -69,7 +73,7 @@ public class Emprestimo : EntidadeBase<Emprestimo>
 
     public void QuitarMulta()
     {
-        multaEstaPaga = true;
+        StatusMulta = StatusMulta.Quitada;
     }
 
     public override void AtualizarDados(Emprestimo entidadeAtualizada)
@@ -88,5 +92,5 @@ public class Emprestimo : EntidadeBase<Emprestimo>
             DataDevolucao = DataEmprestimo.AddDays(Revista.Caixa.DiasDeEmprestimo);
         }
     }
-    
+
 }
