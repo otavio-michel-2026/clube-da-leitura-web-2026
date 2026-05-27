@@ -5,5 +5,5 @@ namespace ClubeDaLeituraWeb.WebApp.ModuloReserva.Dominio;
 public interface IRepositorioReserva : IRepositorio<Reserva>
 {
     public void Cancelar(Reserva reserva);
-    public void Concluir(Reserva reserva);
+    public void RealizarEmprestimo(Reserva reserva);
 }

@@ -17,8 +17,9 @@ public class RepositorioReserva : RepositorioBaseEmArquivo<Reserva>, IRepositori
         reserva.CancelarReserva();
         contexto.Salvar();
     }
-    public void Concluir(Reserva reserva)
+    public void RealizarEmprestimo(Reserva reserva)
     {
-        reserva.Concluir();
+        reserva.RealizarEmprestimo();
+        contexto.Salvar();
     }
 }

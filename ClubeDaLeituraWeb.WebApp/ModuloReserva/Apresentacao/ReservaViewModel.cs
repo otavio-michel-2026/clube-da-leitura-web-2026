@@ -27,5 +27,11 @@ public record ReservaMostrarViewModel
 
     string Id
 );
+public record ReservaDevolverViewModel
+(
+    string Revista,
+
+    string Id
+);
 
 
