@@ -23,7 +23,7 @@ public class Reserva : EntidadeBase<Reserva>
         Amigo = entidadeAtualizada.Amigo;
         Revista = entidadeAtualizada.Revista;
     }
-    public void ConverterParaEmprestimo()
+    public void Concluir()
     {
         StatusReserva = StatusReserva.Concluida;
     }

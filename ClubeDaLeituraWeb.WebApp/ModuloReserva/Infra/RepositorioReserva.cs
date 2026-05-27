@@ -4,9 +4,9 @@ using ClubeDaLeituraWeb.WebApp.ModuloReserva.Dominio;
 namespace ClubeDaLeituraWeb.WebApp.ModuloReserva.Infra;
 
 public class RepositorioReserva : RepositorioBaseEmArquivo<Reserva>, IRepositorioReserva
+
 {
     public RepositorioReserva(ContextoJson contexto) : base(contexto) { }
-
 
     protected override List<Reserva> CarregarRegistros()
     {
@@ -17,8 +17,8 @@ public class RepositorioReserva : RepositorioBaseEmArquivo<Reserva>, IRepositori
         reserva.CancelarReserva();
         contexto.Salvar();
     }
-    public void ConverterParaEmprestimo(Reserva reserva)
+    public void Concluir(Reserva reserva)
     {
-        reserva.ConverterParaEmprestimo();
+        reserva.Concluir();
     }
 }
