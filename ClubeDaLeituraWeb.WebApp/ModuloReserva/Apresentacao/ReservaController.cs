@@ -102,6 +102,35 @@ public class ReservaController : Controller
 
         return RedirectToAction(nameof(Listar));
     }
+    [HttpGet]
+    public ActionResult Concluir(string id)
+    {
+        Reserva? reserva = repositorioReserva.SelecionarPorId(id);
+
+        if (reserva is null)
+            return RedirectToAction(nameof(Listar));
+
+        ReservaMostrarViewModel vm = new(
+            reserva.Amigo.Nome,
+            reserva.Revista.Titulo,
+            reserva.Data,
+            reserva.StatusReserva,
+            reserva.Id
+        );
+
+        return View(vm);
+    }
+
+    [HttpPost]
+    public ActionResult Concluir(ReservaViewModel vm)
+    {
+        Reserva? reserva = repositorioReserva.SelecionarPorId(vm.Id);
+
+        if (reserva is not null)
+            repositorioReserva.Concluir(reserva);
+
+        return RedirectToAction(nameof(Listar));
+    }
 
     private List<SelectListItem> CarregarAmigos()
     {
