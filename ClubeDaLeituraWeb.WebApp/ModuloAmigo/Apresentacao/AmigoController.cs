@@ -1,4 +1,5 @@
 using ClubeDaLeituraWeb.WebApp.ModuloAmigo.Dominio;
+using ClubeDaLeituraWeb.WebApp.ModuloEmprestimo.Dominio;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClubeDaLeituraWeb.WebApp.ModuloAmigo.Apresentacao
@@ -16,7 +17,7 @@ namespace ClubeDaLeituraWeb.WebApp.ModuloAmigo.Apresentacao
         public ActionResult Listar()
         {
             var vms = repositorioAmigo.SelecionarTodos()
-                .Select(a => new AmigoViewModel(a.Nome, a.NomeResponsavel, a.Telefone, a.Id)).ToList();
+                .Select(a => new AmigoMostrarViewModel(a.Nome, a.NomeResponsavel, a.Telefone, a.Emprestimos.Any(e => e.StatusMulta != StatusMulta.SemMulta),a.Id)).ToList();
 
             return View(vms);
         }
@@ -128,6 +129,21 @@ namespace ClubeDaLeituraWeb.WebApp.ModuloAmigo.Apresentacao
             repositorioAmigo.Excluir(amigo);
 
             return RedirectToAction(nameof(Listar));
+        }
+
+        [HttpGet]
+        public ActionResult ListarMultas(string id)
+        {
+            Amigo? amigo = repositorioAmigo.SelecionarPorId(id);
+
+            if (amigo is null)
+                return RedirectToAction(nameof(Listar));
+
+            ViewBag.Nome = amigo.Nome;
+
+            var vms = amigo.Emprestimos.Where(e => e.StatusMulta != StatusMulta.SemMulta).Select(e => new AmigoMultasViewModel(e.Revista.Titulo, e.CalcularMulta(), e.StatusMulta)).ToList();
+
+            return View(vms);
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using ClubeDaLeituraWeb.WebApp.ModuloEmprestimo.Dominio;
 
 namespace ClubeDaLeituraWeb.WebApp.ModuloAmigo.Apresentacao;
 
@@ -16,4 +17,20 @@ public record AmigoViewModel(
     string Telefone,
     
     string Id = ""
+);
+public record AmigoMostrarViewModel(
+    string Nome,
+
+    string NomeResponsavel,
+    
+    string Telefone,
+
+    bool TemMultas,
+    
+    string Id = ""
+);
+public record AmigoMultasViewModel(
+    string Revista,
+    decimal Valor,
+    StatusMulta Status
 );
