@@ -1,112 +1,44 @@
-# Clube da Leitura
+# Clube da Leitura Web
 
-Gustavo tem uma coleção grande de revistas em quadrinhos. Por isso, resolveu
-emprestar para os amigos. Assim foi criado o Clube da Leitura.
+**Trabalho 03 - [Academia do Programador](https://www.academiadoprogramador.net/inicio) 2026**
 
-Mas para não perder nenhuma revista, seu pai contratou os alunos da Academia do
-Programador para fazer uma aplicação que cadastra as revistas e controla os
-empréstimos.
+"Gustavo tem uma coleção grande de revistas em quadrinhos. Por isso, resolveu emprestar para os amigos. Assim foi criado o Clube da Leitura.
 
-## 1. Módulo de Caixas
+Mas para não perder nenhuma revista, seu pai contratou os alunos da Academia do Programador para fazer uma aplicação web que cadastra as revistas e controla os empréstimos."
 
-**Requisitos Funcionais:**
+![Demonstração](https://i.imgur.com/cbzkJb5.gif)
 
-- O sistema deve permitir cadastrar novas caixas
-- O sistema deve permitir editar caixas existentes
-- O sistema deve permitir excluir caixas
-- O sistema deve permitir visualizar todas as caixas
+## Funcionalidades
 
-**Regras de Negócio:**
+- Cadastro, edição, exclusão e visualização de caixas, revistas e amigos
+- Controle de empréstimos:
+  - Registro de novos empréstimos
+  - Registro de devoluções
+  - Visualização de empréstimos abertos e concluídos
 
-- Campos obrigatórios:
-- Etiqueta (texto único, máximo 50 caracteres)
-- Cor (seleção de paleta ou hexadecimal)
-- Dias de empréstimo (número, padrão 7)
-- Não pode haver etiquetas duplicadas
-- Não permitir excluir uma caixa caso tenha revistas vinculadas
-- Cada caixa define o prazo máximo para empréstimo de suas revistas
+## Persistência de Dados
 
-## 2. Módulo de Revistas
+Os dados são armazenados em arquivo JSON no caminho:
 
-**Requisitos Funcionais:**
+`%LocalAppData%/ClubeDaLeituraWeb/dadosSalvos.json`
 
-- O sistema deve permitir cadastrar novas revistas
-- O sistema deve permitir editar revistas existentes
-- O sistema deve permitir excluir revistas
-- O sistema deve permitir visualizar todas as revistas
+## Como Executar
 
-**Regras de Negócio:**
+### Pré-requisitos
 
-- Campos obrigatórios:
-    - Título (2-100 caracteres)
-    - Número da edição (número positivo)
-    - Ano de publicação (data válida)
-    - Caixa (seleção obrigatória)
-- Não pode haver revistas com mesmo título e edição
+- [.NET 10 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0)
 
-## 3. Módulo de Amigos
+### Passos
 
-**Requisitos Funcionais**
+1. Abra a pasta do repositório.
+2. Restaure e compile (opcional):
 
-- O sistema deve permitir a inserção de novos amigos
-- O sistema deve permitir a edição de amigos já cadastrados
-- O sistema deve permitir excluir amigos já cadastrados
-- O sistema deve permitir visualizar amigos cadastrados
+```bash
+dotnet build ClubeDaLeituraWeb.slnx
+```
 
-**Regras de Negócio:**
+3. Execute a aplicação:
 
-- Campos obrigatórios:
-    - Nome (mínimo 3 caracteres, máximo 100)
-    - Nome do responsável (mínimo 3 caracteres, máximo 100)
-    - Telefone (formato validado: 10-11 dígitos)
-    - Não pode haver amigos com o mesmo nome e telefone
-
-## 4. Módulo de Empréstimos
-
-**Requisitos Funcionais:**
-
-- O sistema deve permitir registrar novos empréstimos
-- O sistema deve permitir registrar devoluções
-- O sistema deve permitir visualizar empréstimos abertos e fechados
-
-**Refatorações:**
-
-**Revistas:**
-
-- O sistema deve armazenar e mostrar o status atual das revistas cadastradas (disponível/emprestada/reservada)
-
-**Amigos:**
-
-- O sistema deve permitir visualizar os empréstimos de amigos específicos
-- Não permitir excluir um amigo caso tenha empréstimos vinculados
-  Regras de Negócio:
-- Campos obrigatórios:
-    - Amigo
-    - Revista (disponível no momento)
-    - Data empréstimo (automática)
-    - Data devolução (calculada conforme caixa)
-- Status possíveis: Aberto / Concluído / Atrasado
-- Cada amigo só pode ter um empréstimo ativo por vez
-- Empréstimos atrasados devem ser destacados visualmente
-- A data de devolução é calculada automaticamente (data empréstimo + dias da
-  caixa)
-
-## Como utilizar
-
-1. Clone o repositório ou baixe o código fonte.
-2. Abra o terminal ou o prompt de comando e navegue até a pasta raiz
-3. Utilize o comando abaixo para restaurar as dependências do projeto.
-
-    ```bash
-    dotnet restore
-    ```
-
-4. Para executar o projeto compilando em tempo real
-
-    ```bash
-    dotnet run --project ClubeDaLeituraWeb.WebApp
-    ```
-
-## Requisitos
-
-- .NET 10.0 SDK
+```bash
+dotnet run --project ClubeDaLeituraWeb.WebApp
+```
