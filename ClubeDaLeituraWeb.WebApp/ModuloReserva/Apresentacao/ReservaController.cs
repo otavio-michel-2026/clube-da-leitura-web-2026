@@ -1,3 +1,4 @@
+using System.Data.Common;
 using System.Text.RegularExpressions;
 using ClubeDaLeituraWeb.WebApp.ModuloAmigo.Dominio;
 using ClubeDaLeituraWeb.WebApp.ModuloReserva.Dominio;
@@ -30,7 +31,7 @@ public class ReservaController : Controller
     public ActionResult Listar()
     {
         var vms = repositorioReserva.SelecionarTodos()
-            .Select(c => new ReservaMostrarViewModel(c.Amigo.Nome, c.Revista.Titulo, c.Data, c.StatusReserva, c.Id)).ToList();
+            .Select(c => new ReservaMostrarViewModel(c.Amigo.Nome, c.Revista.Titulo, c.Data.ToString(format: "dd/MM/yyyy"), c.StatusReserva, c.Id)).ToList();
 
         return View(vms);
     }
@@ -87,7 +88,7 @@ public class ReservaController : Controller
         ReservaMostrarViewModel vm = new(
             reserva.Amigo.Nome,
             reserva.Revista.Titulo,
-            reserva.Data,
+            reserva.Data.ToString(format: "dd/MM/yyyy"),
             reserva.StatusReserva,
             reserva.Id
         );

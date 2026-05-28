@@ -21,7 +21,7 @@ public record ReservaMostrarViewModel
 
     string Revista,
 
-    DateTime Data,
+    string Data,
 
     StatusReserva Status,
 
