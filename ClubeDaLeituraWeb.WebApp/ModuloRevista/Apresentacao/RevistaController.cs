@@ -4,7 +4,7 @@ using ClubeDaLeituraWeb.WebApp.ModuloRevista.Dominio;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace ClubeDaLeituraWeb.WebApp.Modulorevista.Apresentacao;
+namespace ClubeDaLeituraWeb.WebApp.ModuloRevista.Apresentacao;
 
 public class RevistaController : Controller
 {
@@ -159,7 +159,7 @@ public class RevistaController : Controller
 
         revista.Caixa.RetirarRevistaDaCaixa(revista);
         repositorioRevista.Excluir(revista);
-        
+
         return RedirectToAction(nameof(Listar));
     }
 
