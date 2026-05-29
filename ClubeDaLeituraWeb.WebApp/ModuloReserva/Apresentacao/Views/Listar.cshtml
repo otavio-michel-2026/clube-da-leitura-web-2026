@@ -34,14 +34,18 @@ else
                         <td>@e.Id</td>
                         <td>@e.Amigo</td>
                         <td>@e.Revista</td>
-                        <td>@e.Data.t</td>
+                        <td>@e.Data.ToString()</td>
                         <td>@e.Status.ToString()</td>
                         <td>
                             <div class="d-flex gap-2">
                                 <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="Cancelar"
                                    asp-route-id="@e.Id">Cancelar</a>
-                                <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="RealizarEmprestimo"
-                                   asp-route-id="@e.Id">Concluir</a>
+                                @if (e.Status == StatusReserva.Aberta)
+                                {
+                                    <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="RealizarEmprestimo"
+                                       asp-route-id="@e.Id">Concluir</a>
+                                }
+
                             </div>
                         </td>
                     </tr>

@@ -1,6 +1,7 @@
 using System.Data.Common;
 using System.Text.RegularExpressions;
 using ClubeDaLeituraWeb.WebApp.ModuloAmigo.Dominio;
+using ClubeDaLeituraWeb.WebApp.ModuloEmprestimo.Dominio;
 using ClubeDaLeituraWeb.WebApp.ModuloReserva.Dominio;
 using ClubeDaLeituraWeb.WebApp.ModuloReserva.Infra;
 using ClubeDaLeituraWeb.WebApp.ModuloRevista.Dominio;
@@ -14,14 +15,17 @@ public class ReservaController : Controller
     private readonly IRepositorioReserva repositorioReserva;
     private readonly IRepositorioAmigo repositorioAmigo;
     private readonly IRepositorioRevista repositorioRevista;
+    private readonly IRepositorioEmprestimo repositorioEmprestimo;
 
     public ReservaController
     (
     IRepositorioReserva repositorioReserva,
     IRepositorioAmigo repositorioAmigo,
-    IRepositorioRevista repositorioRevista
+    IRepositorioRevista repositorioRevista,
+    IRepositorioEmprestimo repositorioEmprestimo
     )
     {
+        this.repositorioEmprestimo = repositorioEmprestimo;
         this.repositorioReserva = repositorioReserva;
         this.repositorioAmigo = repositorioAmigo;
         this.repositorioRevista = repositorioRevista;
@@ -128,7 +132,13 @@ public class ReservaController : Controller
         Reserva? reserva = repositorioReserva.SelecionarPorId(vm.Id);
 
         if (reserva is not null)
+        {
+            Emprestimo reservaEmprestimo = new Emprestimo(reserva.Amigo, reserva.Revista);
+
+
+            repositorioEmprestimo.Cadastrar(reservaEmprestimo);
             repositorioReserva.RealizarEmprestimo(reserva);
+        }
 
 
         return RedirectToAction(nameof(Listar));

@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using ClubeDaLeituraWeb.WebApp.ModuloCaixa.Dominio;
+using ClubeDaLeituraWeb.WebApp.ModuloRevista.Dominio;
 
 namespace ClubeDaLeituraWeb.WebApp.ModuloRevista.Apresentacao;
 
@@ -28,6 +29,8 @@ public record RevistaMostrarViewModel
     uint NumeroDeEdicao,
 
     int AnoDePublicacao,
+
+    StatusRevista Status,
 
     string Caixa,
 

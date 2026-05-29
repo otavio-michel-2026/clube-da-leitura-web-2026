@@ -17,6 +17,7 @@ public class Reserva : EntidadeBase<Reserva>
         Amigo = amigo;
         Revista = revista;
         StatusReserva = StatusReserva.Aberta;
+        Revista.ReservarRevista();
     }
     public override void AtualizarDados(Reserva entidadeAtualizada)
     {
@@ -25,6 +26,7 @@ public class Reserva : EntidadeBase<Reserva>
     }
     public void RealizarEmprestimo()
     {
+
         StatusReserva = StatusReserva.Concluida;
     }
     public void CancelarReserva()

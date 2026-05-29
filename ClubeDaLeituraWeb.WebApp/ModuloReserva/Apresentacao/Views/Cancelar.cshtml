@@ -8,7 +8,7 @@
     Deseja realmente cancelar essa reserva?
 </div>
 
-<form class="card border-primary-subtle shadow-sm mx-auto p-4" style="max-width: 620px;" asp-action="Excluir"
+<form class="card border-primary-subtle shadow-sm mx-auto p-4" style="max-width: 620px;" asp-action="Cancelar"
       asp-route-id="@Model.Id" method="post">
 
     <div class="mb-3">
@@ -30,8 +30,8 @@
     </div>
 
     <div class="mb-3">
-        <label class="form-label fw-semibold text-primary text-uppercase small">Data de reserva</label>
-        <input asp-for="Data" type="text" disabled class="form-control">
+        <label asp-for="Data" class="form-label fw-semibold text-primary text-uppercase small">Data de reserva</label>
+        <input asp-for="Data" type="datetime" disabled class="form-control">
         <input asp-for="Data" type="hidden">
     </div>
 

@@ -20,7 +20,7 @@ public class RevistaController : Controller
     public ActionResult Listar()
     {
         var vms = repositorioRevista.SelecionarTodos()
-            .Select(c => new RevistaMostrarViewModel(c.Titulo, c.NumeroDeEdicao, c.AnoDePublicacao, c.Caixa.Etiqueta, c.Id)).ToList();
+            .Select(c => new RevistaMostrarViewModel(c.Titulo, c.NumeroDeEdicao, c.AnoDePublicacao, c.StatusRevista, c.Caixa.Etiqueta, c.Id)).ToList();
 
         return View(vms);
     }
@@ -136,6 +136,7 @@ public class RevistaController : Controller
         revista.Titulo,
         revista.NumeroDeEdicao,
         revista.AnoDePublicacao,
+        revista.StatusRevista,
         revista.Caixa.Etiqueta,
         id
     );

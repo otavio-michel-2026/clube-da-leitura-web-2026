@@ -36,6 +36,10 @@ public class Revista : EntidadeBase<Revista>
     {
         StatusRevista = StatusRevista.Disponível;
     }
+    public void ReservarRevista()
+    {
+        StatusRevista = StatusRevista.Reservada;
+    }
 
     public override void AtualizarDados(Revista entidadeAtualizada)
     {

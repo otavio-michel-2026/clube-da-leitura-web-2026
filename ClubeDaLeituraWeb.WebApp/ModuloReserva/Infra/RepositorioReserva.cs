@@ -1,4 +1,5 @@
 using ClubeDaLeituraWeb.WebApp.Compartilhado.Infra.Arquivos;
+using ClubeDaLeituraWeb.WebApp.ModuloEmprestimo.Dominio;
 using ClubeDaLeituraWeb.WebApp.ModuloReserva.Dominio;
 
 namespace ClubeDaLeituraWeb.WebApp.ModuloReserva.Infra;
