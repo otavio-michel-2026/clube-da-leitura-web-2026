@@ -2,7 +2,7 @@
     ViewBag.Titulo = "Listagem de Amigos";
 }
 
-@model List<AmigoViewModel>;
+@model List<AmigoMostrarViewModel>;
 
 <a class="btn btn-outline-primary rounded-pill px-4 mb-3" asp-action="Cadastrar">Cadastrar Novo</a>
 
@@ -27,7 +27,7 @@ else
             </thead>
 
             <tbody>
-                @foreach (AmigoViewModel a in Model)
+                @foreach (AmigoMostrarViewModel a in Model)
                 {
                     <tr>
                         <td>@a.Id</td>
@@ -38,6 +38,10 @@ else
                             <div class="d-flex gap-2">
                                 <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="Editar" asp-route-id="@a.Id">Editar</a>
                                 <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="Excluir" asp-route-id="@a.Id">Excluir</a>
+                                @if (a.TemMultas)
+                                {
+                                    <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="ListarMultas" asp-route-id="@a.Id">Listar Multas</a>
+                                }
                             </div>
                         </td>
                     </tr>

@@ -25,7 +25,7 @@ namespace ClubeDaLeituraWeb.WebApp.ModuloEmprestimo.Apresentacao
         public ActionResult Listar()
         {
             var vms = repositorioEmprestimo.SelecionarTodos()
-                .Select(e => new EmprestimoMostrarViewModel(e.Amigo.Nome, e.Revista.Titulo, e.DataEmprestimo, e.DataDevolucao, e.StatusEmprestimo, e.Id))
+                .Select(e => new EmprestimoMostrarViewModel(e.Amigo.Nome, e.Revista.Titulo, e.DataEmprestimo, e.DataDevolucao, e.StatusEmprestimo, e.StatusMulta, e.CalcularMulta(), e.Id))
                 .ToList();
 
             return View(vms);
@@ -67,7 +67,6 @@ namespace ClubeDaLeituraWeb.WebApp.ModuloEmprestimo.Apresentacao
             return RedirectToAction(nameof(Listar));
         }
 
-
         [HttpGet]
         public ActionResult Devolver(string id)
         {
@@ -92,11 +91,34 @@ namespace ClubeDaLeituraWeb.WebApp.ModuloEmprestimo.Apresentacao
             return RedirectToAction(nameof(Listar));
         }
 
+        [HttpGet]
+        public ActionResult QuitarMulta(string id)
+        {
+            Emprestimo? emprestimo = repositorioEmprestimo.SelecionarPorId(id);
+
+            if (emprestimo is null)
+                return RedirectToAction(nameof(Listar));
+
+            EmprestimoQuitarMultaViewModel vm = new(emprestimo.Amigo.Nome, emprestimo.Id);
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult QuitarMulta(EmprestimoQuitarMultaViewModel vm)
+        {
+            Emprestimo? emprestimo = repositorioEmprestimo.SelecionarPorId(vm.Id);
+
+            if (emprestimo is not null)
+                repositorioEmprestimo.QuitarMulta(emprestimo);
+
+            return RedirectToAction(nameof(Listar));
+        }
 
         private List<SelectListItem> CarregarAmigos()
         {
             return repositorioAmigo.SelecionarTodos()
-                .Where(a => a.Emprestimos.Any(e => e.StatusEmprestimo == StatusEmprestimo.Concluído) || a.Emprestimos.Count == 0)
+                .Where(a => a.Emprestimos.Any(e => (e.StatusEmprestimo == StatusEmprestimo.Concluido || e.StatusEmprestimo == StatusEmprestimo.ConcluidoAtrasado) && e.StatusMulta != StatusMulta.Pendente) || a.Emprestimos.Count == 0)
                 .Select(a => new SelectListItem(a.Nome, a.Id))
                 .ToList();
         }

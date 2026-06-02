@@ -24,6 +24,7 @@ else
                     <th>Data de empréstimo</th>
                     <th>Data de devolução</th>
                     <th>Status</th>
+                    <th>Multa</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -40,16 +41,30 @@ else
                         <td>
                             @if (e.StatusEmprestimo == StatusEmprestimo.Atrasado)
                             {
-                                <strong>@e.StatusEmprestimo</strong>
+                                <strong>@e.StatusEmprestimo.String()</strong>
                             }
                             else
                             {
-                                @e.StatusEmprestimo
+                                @e.StatusEmprestimo.String()
+                            }
+                        </td>
+                        <td>
+                            @if (e.StatusMulta == StatusMulta.Pendente)
+                            {
+                                <strong>@e.StatusMulta.String(): </strong><span>@e.Multa.ToString("C2")</span>
+                            }
+                            else
+                            {
+                                @e.StatusMulta.String()
                             }
                         </td>
                         <td>
                             <div class="d-flex gap-2">
                                 <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="Devolver" asp-route-id="@e.Id">Devolver</a>
+                                @if (e.StatusMulta == StatusMulta.Pendente)
+                                {
+                                    <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="QuitarMulta" asp-route-id="@e.Id">Quitar Multa</a>
+                                }
                             </div>
                         </td>
                     </tr>

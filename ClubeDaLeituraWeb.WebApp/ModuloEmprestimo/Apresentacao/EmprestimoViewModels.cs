@@ -19,11 +19,18 @@ public record EmprestimoMostrarViewModel(
     DateTime DataEmprestimo,
     DateTime DataDevolucao,
     StatusEmprestimo StatusEmprestimo,
+    StatusMulta StatusMulta,
+    decimal Multa,
     string Id
 );
 
 public record EmprestimoDevolverViewModel(
     string Revista,
+    string Id
+);
+
+public record EmprestimoQuitarMultaViewModel(
+    string Amigo,
     string Id
 );
 

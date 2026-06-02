@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Titulo = "Multas de " + ViewBag.Nome;
+}
+
+@model List<AmigoMultasViewModel>;
+
+@if (Model.Count == 0)
+{
+    <div class="alert alert-primary border-start border-primary border-2 rounded-3" role="alert">
+        Nenhuma multa.
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered align-middle bg-white">
+            <thead class="table-primary">
+                <tr>
+                    <th>Multa sobre</th>
+                    <th>Valor</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (AmigoMultasViewModel m in Model)
+                {
+                    <tr>
+                        <td>@m.Revista</td>
+                        <td>@m.Valor.ToString("C2")</td>
+                        <td>@m.Status.String()</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a class="btn btn-outline-primary rounded-pill px-4" asp-action="Listar">Voltar</a>
+    </div>
+}
